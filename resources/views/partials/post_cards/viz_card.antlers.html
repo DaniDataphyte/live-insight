@@ -18,8 +18,7 @@
                     {{ viz_type }}<a href="{{ url }}">{{ title }}</a>{{ /viz_type }}
                     {{ /if }}
                 </p>
-                {{ access_level }}<p class="text-xs uppercase mb-2 space-x-2">Access Level: {{ title }}</p>{{
-                /access_level }}
+                
 
                 <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
                     @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">

@@ -13,8 +13,7 @@
                         class="w-full h-[250px] object-cover rounded-md mb-4 transition-transform transform hover:scale-105 duration-300">
                 </a>
 
-                {{ access_level }}<p class="text-xs uppercase mb-2 space-x-2">Access Level: {{ title }}</p>{{
-                /access_level }}
+                
 
                 <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
                     @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">
