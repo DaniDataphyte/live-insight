@@ -1,0 +1,18 @@
+<div x-show="Alpine.store('modalManager').modals.renew"
+    @keydown.escape="Alpine.store('modalManager').closeModal('renew')"
+    @click.away="Alpine.store('modalManager').closeModal('renew')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+
+<div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+    <button @click="Alpine.store('modalManager').closeModal('renew')" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+        &times;
+    </button>
+    <h2 class="text-2xl font-bold mb-4">Renew Your Subscription</h2>
+    <p class="text-gray-600 mb-4">
+        Your subscription has expired. Renew to regain full access to premium content.
+    </p>
+    <button @click="window.location.href='/subscription/renew'" 
+        class="bg-green-500 hover:bg-green-600 text-white w-full py-2 rounded-lg">
+        Renew Now
+    </button>
+</div>

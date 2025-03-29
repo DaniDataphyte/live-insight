@@ -1,0 +1,168 @@
+<footer class="bg-gradient-to-r from-dataphyteblue to-gray-800 text-white">
+    <div class="mx-auto w-full max-w-screen-xl px-4 py-8">
+        <!-- Top Section -->
+        <div class="grid grid-cols-3 md:grid-cols-7 gap-8">
+            <div>
+                <h2 class="mb-1 text-xs font-bold uppercase text-white">Pages</h2>
+                <ul class="space-y-1 text-xs font-medium">
+                    {{ nav:pages }}
+                    <li><a href="{{ homelink }}/{{ url }}" class="hover:underline">{{ title }}</a></li>
+                    {{ /nav:pages }}
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-1 text-xs font-bold uppercase text-white">Articles</h2>
+                <ul class="space-y-1 text-xs font-medium">
+                    {{ nav:dataphyte_collections }}
+                    <li><a href="{{ homelink }}/{{ url }}" class="hover:underline">{{ title }}</a></li>
+                    {{ /nav:dataphyte_collections }}
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-1 text-xs font-bold uppercase text-white">Products</h2>
+                <ul class="space-y-1 text-xs font-medium">
+                    <!-- {{ nav:app_products_list }} -->
+                    <li><a href="{{ url }}" target="_blank" class="hover:underline">{{ title }}</a></li>
+                    <!-- {{ /nav:app_products_list }} -->
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-2 text-sm font-bold uppercase text-white"></h2>
+                <ul class="space-y-1 text-xs font-medium">
+
+                </ul>
+            </div>
+        </div>
+        <div class="grid-cols-3 md:grid-cols-7">
+
+        </div>
+        <!-- Bottom Section -->
+        <div class="mt-8 border-t border-gray-100 pt-4 flex flex-col md:flex-row items-center justify-between">
+            <span class="text-xs text-gray-200">
+                © {{ date format="Y" }}<span class="font-bold"> {{ site:name }}</span>. All rights reserved.
+            </span>
+            <div class="flex mt-4 md:mt-0 space-x-4">
+                <!-- Social Media Icons -->
+                <a href="#" class="text-gray-300 hover:text-white">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 8 19">
+                        <path
+                            d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" />
+                    </svg>
+                    <span class="sr-only">Facebook</span>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 21 16">
+                        <path
+                            d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59Z" />
+                    </svg>
+                    <span class="sr-only">Discord</span>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 20 17">
+                        <path
+                            d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" />
+                    </svg>
+                    <span class="sr-only">Twitter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.plyr.io/3.7.2/plyr.js">
+    const player = new Plyr('.plyr__video-embed');
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form").forEach((form) => {
+            const select = form.querySelector("select");
+            const selectedTopicsContainer = form.querySelector(".selected-topics");
+            const preferredInput = form.querySelector(".preferred-input");
+
+            if (!select || !selectedTopicsContainer || !preferredInput) return;
+
+            let selectedTopics = [];
+
+            select.addEventListener("change", function () {
+                const selectedValue = select.value;
+                if (selectedValue && !selectedTopics.includes(selectedValue)) {
+                    selectedTopics.push(selectedValue);
+                    updateSelectedTopics();
+                }
+            });
+
+            function updateSelectedTopics() {
+                selectedTopicsContainer.innerHTML = "";
+                selectedTopics.forEach((topic) => {
+                    const tag = document.createElement("span");
+                    tag.textContent = topic;
+                    tag.className =
+                        "bg-indigo-500 text-white text-xs px-2 py-1 rounded-md cursor-pointer";
+                    tag.addEventListener("click", () => removeTopic(topic));
+                    selectedTopicsContainer.appendChild(tag);
+                });
+                preferredInput.value = JSON.stringify(selectedTopics);
+            }
+
+            function removeTopic(topic) {
+                selectedTopics = selectedTopics.filter((t) => t !== topic);
+                updateSelectedTopics();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    try {
+        window.remainingFreeArticles = {{ auth_user.remaining_free_articles ?? 0 }};
+        window.isLoggedIn = {{ auth_user ? 'true' : 'false' }};
+        window.userSubscriptionActive = {{ auth_user.subscription_active ? 'true' : 'false' }};
+    } catch (error) {
+        console.error("⚠️ Error initializing global variables:", error);
+        window.remainingFreeArticles = 0;
+        window.isLoggedIn = false;
+        window.userSubscriptionActive = false;
+    }
+</script>
+
+
+
+<!-- Modals (Global) -->
+<div x-show="$store.modalManager.modals.login" @keydown.escape="$store.modalManager.closeModal('login')"
+    @click.away="$store.modalManager.closeModal('login')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    {{ partial:components/modals/modal_signin }}
+</div>
+
+<div x-show="$store.modalManager.modals.signup" @keydown.escape="$store.modalManager.closeModal('signup')"
+    @click.away="$store.modalManager.closeModal('signup')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    {{ partial:components/modals/modal_signup }}
+</div>
+
+<div x-show="$store.modalManager.modals.passwordReset" @keydown.escape="$store.modalManager.closeModal('passwordReset')"
+    @click.away="$store.modalManager.closeModal('passwordReset')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    {{ partial:components/modals/modal_passwordreset }}
+</div>
+
+<div x-show="$store.modalManager.modals.upgrade" @keydown.escape="$store.modalManager.closeModal('upgrade')"
+    @click.away="$store.modalManager.closeModal('upgrade')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    {{ partial:components/modals/modal_upgrade }}
+</div>
+
+<div x-show="$store.modalManager.modals.renew" @keydown.escape="$store.modalManager.closeModal('renew')"
+    @click.away="$store.modalManager.closeModal('renew')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    {{ partial:components/modals/modal_renew }}
+</div>
+
+</body>
+
+</html>

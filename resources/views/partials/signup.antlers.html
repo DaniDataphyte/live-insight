@@ -1,0 +1,68 @@
+{{# Newsletter sign up form #}}
+<div class="bg-sky-100">
+    <div class="container mx-auto py-20 ">
+        <div class="mx-5 py-7">
+            <div class="mb-2">
+                <h2 class="text-3xl font-bold md:text-4xl">Explore Our Issues</h2>
+                <p class="text-sm text-wrap flex-col md:flex-1 md:w-1/2">
+                    Our insightful articles provide clarity on socio-economic issues and empower households, businesses,
+                    and governments to make informed and better decisions.
+                </p>
+            </div>
+
+            <form method="POST" action="{{ route:newsletter.subscribe }}">
+                {{ csrf_field }}
+                <div class="rounded-md text-dataphytegreen">
+                    <div class="grid grid-cols-1 gap-2 md:grid-cols-5">
+
+                        <!-- First Name -->
+                        <div class="col-span-1">
+                            <input type="text" name="title" id="title" autocomplete="given-name"
+                                placeholder="First Name" required
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm" />
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="col-span-1">
+                            <input type="text" name="lastname" id="lastname" autocomplete="family-name"
+                                placeholder="Last Name" required
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm" />
+                        </div>
+
+                        <!-- Preferred Topics (Full-width on mobile) -->
+                        <div class="col-span-1 md:col-span-1">
+                            <select id="preferred"
+                                class="w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline-indigo-600 sm:text-sm">
+                                <option value="" disabled selected>Select Preferred Topics</option>
+                                <option value="topics">Topics</option>
+                                <option value="issues">Issues</option>
+                                <option value="visualisation">Visualisation</option>
+                                <option value="data_card">Data Card</option>
+                            </select>
+                            <!-- Selected Items Display -->
+                            <div id="selected-topics" class="mt-2 flex flex-wrap gap-2"></div>
+                            <input type="hidden" name="preferred[]" id="preferred-input">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-span-1">
+                            <input type="email" name="email" id="email" autocomplete="email" placeholder="Email Address"
+                                required
+                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm" />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-span-1">
+                            <button type="submit"
+                                class="rounded-md bg-indigo-600 px-3 py-2 w-full text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Sign up
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+      
+      

@@ -1,0 +1,186 @@
+<div class="bg-white pt-20">
+    <div class="container mx-auto">
+        <div class="text-center py-10">
+            <h2 class="text-3xl font-bold text-gray-800 md:text-4xl">Explore Daily Card</h2>
+            <p class="mt-4 text-gray-600 text-sm md:text-base">
+                Dive into a collection of well-researched articles and resources designed to empower decision-making.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="py-20 relative bg-gray-200" x-data="modalHandler()">
+    <div class="container mx-auto relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Dynamic Items -->
+            {{ collection:daily_cards paginate="7" as="posts" sort="date:desc" }}
+            {{ posts }}
+            <div
+                class="group bg-white shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                <!-- Image -->
+                <img src="{{ featured_image }}" alt="{{ featured_card:alt }}"
+                    class="w-full h-70 object-cover rounded-t-md border-b-2 cursor-pointer"
+                    @click="openModal('{{ featured_image }}', '{{ title | strip_tags }}', `{{ content | nl2br }}`)">
+
+                <!-- Content -->
+                <div class="py-4 px-4">
+                    <h3 class="text-base leading-5 font-semibold tracking-tight">{{ title | strip_tags }}</h3>
+                    <p class="mt-2 text-sm mb-4">
+                        {{ content | nl2br }}
+                    </p>
+                    <div class="navbar mt-4 pt-2 flex items-center justify-between border-t">
+                        <!-- Social Media Icons -->
+                        <div class="flex gap-2">
+                            <!-- Share Icon -->
+                            <a href="#" onclick="share('generic')">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    class="w-5 h-5 text-gray-500 hover:text-gray-700">
+                                    <path fill-rule="evenodd"
+                                        d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                    class="w-5 h-5 text-blue-600 hover:text-blue-800">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M11.25 2.25a9 9 0 100 18v-6h-2.25v-3h2.25v-1.5a3 3 0 013-3h3v3h-3v1.5h3l-.75 3h-2.25v6a9 9 0 00-7.5-17.732V2.25z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <!-- Date -->
+                        <div class="text-xs">{{ date }}</div>
+                    </div>
+                </div>
+            </div>
+            {{ /posts }}
+
+
+
+
+
+
+            <!-- Static Item -->
+            <div class="md:col-span-1">
+                <div class="bg-sky-100 rounded px-4 py-3 space-y-3 md:mt-10">
+                    <div class="items-baseline flex gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 text-gray-900">
+                            <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                            <path fill-rule="evenodd"
+                                d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <h2 class="text-lg font-bold">Datastore</h2>
+                    </div>
+                    <p class="pb-2 text-xs">Access free and paid datasets on key economic, educational, energy,
+                        environmental, financial, health, and security data</p>
+                    <button
+                        class="bg-dataphyteblue px-8 py-2 text-white hover:bg-white hover:text-dataphyteblue hover:shadow-md">
+                        More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div x-show="isOpen" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-5xl w-full mx-4">
+            <!-- Close Button -->
+            <button @click="closeModal()"
+                class="absolute top-5 right-20 text-white bg-red-500 rounded-full p-2 hover:bg-red-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="flex flex-col md:flex-row items-start gap-6 p-6">
+                <!-- Image -->
+                <div class="w-full md:w-2/3 flex justify-center">
+                    <img :src="image" class="max-w-full max-h-full object-contain rounded-lg" alt="Modal Image">
+                </div>
+                <!-- Content -->
+                <div class="w-full md:w-1/3">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800" x-text="title"></h3>
+                    <p class="text-base text-gray-700 leading-relaxed" x-html="content"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ paginate }}
+<div class="flex items-center justify-between px-4 py-0 sm:px-6 pb-20 pt-10">
+    <div class="container mx-auto border-gray-200 border-t ">
+        <div class="flex flex-1 justify-between sm:hidden">
+            <a href="#"
+                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+            <a href="#"
+                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+        </div>
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-gray-700">
+                    Showing
+                    <span class="font-medium">{{ current_page }}</span>
+                    to
+                    <span class="font-medium">{{ total_results }}</span>
+                    of
+                    <span class="font-medium">{{ total_items }}</span>
+                    Articles
+                </p>
+            </div>
+            <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                    <a href="{{ prev_page }}"
+                        class="relative inline-flex items-center rounded-l-md px-1 py-1 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Previous</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    
+                    <a href="{{ next_page }}"
+                        class="relative inline-flex items-center rounded-r-md px-1 py-1 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Next</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        {{ /paginate }}
+        {{ /collection:daily_cards }}
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function modalHandler() {
+        return {
+            isOpen: false,
+            image: '',
+            title: '',
+            content: '',
+            openModal(image, title, content) {
+                this.isOpen = true;
+                this.image = image;
+                this.title = title;
+                this.content = content;
+            },
+            closeModal() {
+                this.isOpen = false;
+            }
+        };
+    }
+</script>

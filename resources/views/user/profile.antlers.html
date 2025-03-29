@@ -1,0 +1,123 @@
+{{ partial:partials/head }}
+
+<header>
+    <div class="">
+    {{ partial:partials/navbar }}
+    </div>
+</header>
+
+<div x-data="profile()" x-init="fetchUserProfile()" class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">
+    <!-- Profile Header -->
+    <div class="flex flex-col items-center space-y-3">
+        <img :src="profileImage" class="w-28 h-28 rounded-full border-4 border-gray-200 shadow-md" alt="Profile Picture">
+        <h1 class="text-xl font-semibold">Welcome, <span x-text="firstname"></span> <span x-text="lastname"></span></h1>
+        {{# <h1 class="text-xl font-semibold">Welcome, <span x-text="fullname"></span></h1> #}}
+
+    </div>
+    
+
+    <!-- Profile Update Form -->
+    <form @submit.prevent="updateUserProfile" class="mt-6 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="text-sm font-medium">Firstname</label>
+                <input type="text" x-model="firstname" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+                <label class="text-sm font-medium">Lastname</label>
+                <input type="text" x-model="lastname" class="w-full p-2 border rounded-lg">
+            </div>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium">Email</label>
+            <input type="email" x-model="email" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium">Bio</label>
+            <textarea x-model="bio" class="w-full p-2 border rounded-lg" rows="3"></textarea>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium">Gender</label>
+            <select x-model="gender" class="w-full p-2 border rounded-lg">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="text-sm font-medium">Country</label>
+                <input type="text" x-model="country" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+                <label class="text-sm font-medium">Profession</label>
+                <input type="text" x-model="profession" class="w-full p-2 border rounded-lg">
+            </div>
+        </div>
+
+        <div class="bg-gray-100 p-3 rounded-lg">
+            <p class="text-sm font-medium">Subscription Plan: <span class="font-semibold" x-text="subscriptionPlan"></span></p>
+            <p class="text-sm font-medium">Remaining Free Articles: <span class="font-semibold" x-text="remainingFreeArticles"></span></p>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium">Profile Picture</label>
+            <input type="file" @change="updateProfile" class="w-full p-2 border rounded-lg">
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Update Profile</button>
+    </form>
+
+    <!-- Password Update Form -->
+    <form @submit.prevent="updatePassword" class="mt-6 p-4 border rounded-lg bg-gray-50">
+        <h2 class="text-lg font-semibold mb-2">Change Password</h2>
+        <div class="space-y-3">
+            <input type="password" placeholder="New Password" x-model="password" class="w-full p-2 border rounded-lg">
+            <input type="password" placeholder="Confirm Password" x-model="passwordConfirmation" class="w-full p-2 border rounded-lg">
+        </div>
+        <button type="submit" class="w-full bg-red-600 text-white py-2 mt-3 rounded-lg hover:bg-red-700 transition">Update Password</button>
+    </form>
+</div>
+
+{{# <div x-data="profile()" x-init="fetchProfile()">
+    <h1>Welcome, <span x-text="firstname"></span> <span x-text="lastname"></span></h1>
+    <img :src="profileImage" class="w-24 h-24 rounded-full border" alt="Profile Picture">
+
+    <form @submit.prevent="updateProfile">
+        <input type="text" x-model="firstname" placeholder="Firstname">
+        <input type="text" x-model="lastname" placeholder="Lastname">
+        <input type="email" x-model="email" placeholder="Email" readonly>
+        <textarea x-model="bio" placeholder="Bio"></textarea>
+
+        <select x-model="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <input type="text" x-model="country" placeholder="Country">
+        <input type="text" x-model="profession" placeholder="Profession">
+        
+        <p>Subscription Plan: <span x-text="subscriptionPlan"></span></p>
+        <p>Remaining Free Articles: <span x-text="remainingFreeArticles"></span></p>
+
+        <input type="file" @change="updateProfile">
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <form @submit.prevent="updatePassword">
+        <input type="password" placeholder="New Password" x-model="password">
+        <input type="password" placeholder="Confirm Password" x-model="passwordConfirmation">
+        <button type="submit">Update Password</button>
+    </form>
+</div> #}}
+
+
+
+{{ partial:partials/footer }}

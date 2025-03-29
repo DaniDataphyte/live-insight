@@ -1,0 +1,88 @@
+
+<div class="py-5 bg-gray-200 text-base">
+    <div class="container mx-auto">
+{{ if { session:success } }}
+    <div class="alert alert-success">
+        {{ session:success }}
+    </div>
+{{ /if }}
+</div>
+</div>
+
+
+
+<div class="bg-white pt-20">
+
+    <div class="text-center py-10">
+        <h2 class="text-3xl font-bold text-gray-800 md:text-4xl">Explore Our Insights</h2>
+        <p class="mt-4 text-gray-600 text-sm md:text-base px-8">
+            Dive into a collection of well-researched articles and resources designed to empower
+            decision-making.
+        </p>
+    </div>
+</div>
+<div class="bg-gray-200 pt-20">
+    <div class="container mx-auto">
+
+        {{ collection:newsletters paginate="8" as="posts" sort="date:desc" }}
+        {{ partial:partials/newsletter_archive_card }}
+
+    </div>
+</div>
+{{ paginate }}
+<div class="flex items-center justify-between px-4 py-0 sm:px-6 pb-20 pt-10">
+    <div class="container mx-auto border-gray-200 border-t ">
+        <div class="flex flex-1 justify-between sm:hidden">
+            <a href="#"
+                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+            <a href="#"
+                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+        </div>
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-gray-700">
+                    Page
+                    <span class="font-medium">{{ current_page }}: </span>
+                    Showing
+                    <span class="font-medium">{{ total_results * current_page }}</span>
+                    of
+                    <span class="font-medium">{{ total_items }}</span>
+                    Articles
+                </p>
+            </div>
+            <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                    <a href="{{ prev_page }}"
+                        class="relative inline-flex items-center rounded-l-md px-1 py-1 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Previous</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+                    <!--  <a href="#" aria-current="page"
+                    class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</a>
+                <a href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                <a href="#"
+                    class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a> -->
+
+                    <a href="{{ next_page }}"
+                        class="relative inline-flex items-center rounded-r-md px-1 py-1 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Next</span>
+                        <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd"
+                                d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        {{ /paginate }}
+        {{ /collection:newsletters }}
+    </div>
+</div>
+</div>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="{{ site:short_locale }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <!-- Primary Meta Tags -->
+    <title>{{ meta_title ?? title ?? "Dataphyte Insight" }} | Dataphyte Insight</title>
+    <meta name="description" content="{{ meta_description ?? description ?? 'Stay informed with insightful news, reports, and data-driven journalism from Dataphyte.' }}">
+    <meta name="keywords" content="{{ meta_keywords ?? keywords | join(', ') }}">
+    <meta name="author" content="{{ author_name ?? 'Dataphyte' }}">
+    <link rel="canonical" href="{{ url ?? site_url }}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="{{ og_title ?? meta_title ?? title }}" />
+    <meta property="og:description" content="{{ og_description ?? meta_description ?? description }}" />
+    {{ if featured_image }}
+    <meta property="og:image" content="{{ featured_image | url }}">
+{{ else }}
+    <meta property="og:image" content="/landscape_default_image:landscape_image">
+{{ /if }}
+
+    <meta property="og:url" content="{{ og_url ?? url }}" />
+    <meta property="og:type" content="{{ og_type ?? 'article' }}" />
+    <meta property="og:site_name" content="{{ site_name ?? 'Dataphyte Insight' }}" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ twitter_title ?? meta_title ?? title }}" />
+    <meta name="twitter:description" content="{{ twitter_description ?? meta_description ?? description }}" />
+    {{ if featured_image }}
+    <meta property="og:image" content="{{ featured_image | url }}">
+{{ else }}
+    <meta property="og:image" content="/landscape_default_image:landscape_image">
+{{ /if }}
+    <meta name="twitter:url" content="{{ twitter_url ?? url }}" />
+    <meta name="twitter:site" content="{{ twitter_handle ?? '@Dataphyte' }}">
+    <meta name="twitter:creator" content="{{ twitter_creator ?? '@Dataphyte' }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ logo:homelink }}assets/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ apple_touch_icon | url ?? '/assets/apple-touch-icon.png' }}">
+    <link rel="manifest" href="/site.webmanifest">
+    {{# <link rel="manifest" href="{{ asset('site.webmanifest') }}"> #}}
+
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site_name ?? 'Dataphyte Insight' }}" href="{{ rss_url ?? '/rss.xml' }}">
+
+    <!-- Styles & Scripts -->
+    {{ vite src="resources/js/site.js|resources/css/site.css" }}
+    
+    <!-- Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- SEO & Performance Enhancements -->
+    <meta name="robots" content="index, follow">
+    <meta name="#2f70a8" content="#111827">
+    <meta http-equiv="content-language" content="en">
+    <meta name="generator" content="Statamic CMS">
+
+    <!-- JSON-LD Structured Data for Articles -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": "{{ title }}",
+            "description": "{{ meta_description ?? description }}",
+            "image": "{{ og_image ?? (featured_image ? featured_image | url : '/landscape_default_image:landscape_image') }}",
+            "author": {
+                "@type": "Person",
+                "name": "{{ author_name ?? 'Dataphyte' }}"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Dataphyte",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ logo_url ?? '/assets/logo.png' }}"
+                }
+            },
+            "datePublished": "{{ published_at ?? date format='c' }}",
+            "dateModified": "{{ updated_at ?? date format='c' }}"
+        }
+    </script>
+
+</head>
+
+<body class="text-gray-500 bg-white" x-data x-init="$store.auth.initAuthListener()">
+    
+
+
+
+
+

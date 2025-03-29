@@ -1,0 +1,124 @@
+<!-- Hero section -->
+{{ partial:partials/post_cards/heroslider }}
+
+{{# Latest reports #}}
+<div class="bg-white py-20">
+    <div class="container mx-auto">
+        <div class="text-center py-10">
+            <h2 class="text-3xl font-bold text-gray-800 md:text-4xl">Explore Our Insights</h2>
+            <p class="mt-4 text-gray-600 text-sm md:text-base px-10">
+                Dive into a collection of well-researched articles and resources designed to empower
+                decision-making.
+            </p>
+        </div>
+
+        <div class="">
+            {{ collection:topics paginate="5" as="posts" sort="date:desc" }}
+            {{ partial:partials/post_cards/topic_card }}
+        </div>
+        {{ /collection:topics }}
+    </div>
+</div>
+
+<!--Advert Leaderboard -->
+{{ if medium_banner:desktop || medium_banner:tablet || medium_banner:mobile }}
+<div class="bg-gray-100 py-8">
+    <div class="container mx-auto">
+        {{ partial:partials/lead_banner }}
+    </div>
+</div>
+{{ /if }}
+
+{{# Newsletter Issues #}}
+<div class="pt-20 pb-10 bg-gray-50">
+    <div class="container mx-auto">
+        <div class="text-center py-10">
+            <h2 class="text-3xl font-bold text-gray-800 md:text-4xl">Explore Our Issues</h2>
+            <p class="mt-4 text-gray-600 text-sm md:text-base px-10">
+                Dive into a collection of well-researched articles and resources designed to empower
+                decision-making.
+            </p>
+        </div>
+        <!-- Outer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-8 px-4">
+            {{ collection:issues paginate="4" as="posts" sort="date:desc" }}
+            {{ partial:partials/post_cards/issuecard }}
+            {{ /collection:issues }}
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+{{# Newsletter Signup #}}
+<div class="bg-sky-100">
+    <div class="container mx-auto py-20 ">
+        <h2 class="text-3xl font-bold md:text-4xl">Explore Our Issues</h2>
+        {{ partial:partials/simplesignup }}
+    </div>
+</div>
+
+
+<!--Daily Graphic Section Begins -->
+<div class="py-20 relative bg-gray-200">
+    <div class="container mx-auto relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-10">
+            <!-- Static Item -->
+            <div class="md:col-span-1">
+
+                <div class="bg-white p-4 space-y-3">
+                    <h2 class="text-xl font-bold">Daily Card</h2>
+                    <p class="text-base border-b-2 border-dataphyteblue pb-6">
+                        Provides you the clarity and context on trending topics on-the-go </p>
+                    <button
+                        class="bg-dataphyteblue px-8 py-2 text-white hover:bg-white hover:text-dataphyteblue hover:shadow-md">
+                        <a href="http://insightdev.test/daily-card">More</a>
+                    </button>
+                </div>
+
+                <div class="bg-sky-100 rounded px-4 py-3 space-y-3 md:mt-10">
+                    <div class="items-baseline flex gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 text-gray-900">
+                            <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                            <path fill-rule="evenodd"
+                                d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <h2 class="text-lg font-bold">Datastore</h2>
+                    </div>
+                    <p class="pb-2 text-xs">Access free and paid datasets on key economic, educational, energy,
+                        environmental,
+                        financial, health, and security data</p>
+                    <button
+                        class="bg-dataphyteblue px-8 py-2 text-white hover:bg-white hover:text-dataphyteblue hover:shadow-md">
+                        More
+                    </button>
+                </div>
+            </div>
+            {{ collection:daily_cards paginate="3" as="posts" sort="date:desc" }}
+            {{ partial:partials/post_cards/dailycard }}
+            {{ /collection:daily_cards }}
+        </div>
+    </div>
+</div>
+<!--Daily Graphic Section Ends -->
+
+<!--Advert Medium -->
+{{ if medium_banner:desktop || medium_banner:tablet || medium_banner:mobile }}
+<div class="bg-gray-100 py-8">
+    <div class="container mx-auto">
+
+        {{ partial:partials/medium_banner }}
+
+    </div>
+</div>
+{{ /if }}
+
+<div class="">
+<!-- Video Player -->
+{{ partial:partials/video_player }}
+</div>

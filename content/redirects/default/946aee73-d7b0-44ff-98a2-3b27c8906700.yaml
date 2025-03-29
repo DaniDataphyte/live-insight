@@ -1,0 +1,6 @@
+id: 946aee73-d7b0-44ff-98a2-3b27c8906700
+enabled: true
+source: /issue/2024/03/mtn-explains-downtime
+destination: /issue/2024/02/mtn-explains-downtime
+type: 301
+match_type: exact

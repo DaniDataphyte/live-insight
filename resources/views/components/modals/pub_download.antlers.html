@@ -1,0 +1,56 @@
+<div x-show="modals.download" @keydown.escape.window="modals.download = false" @click.away="modals.download = false"
+     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-semibold mb-4">Download File</h2>
+
+        <p class="text-gray-700">Complete the form below to get your file.</p>
+
+        <form method="POST" action="{{ route:pub.download }}">
+            {{ csrf_field }}
+
+            <!-- First Name -->
+            <input type="text" name="title" placeholder="First Name" required
+                   class="w-full mt-3 px-3 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500"/>
+
+            <!-- Last Name -->
+            <input type="text" name="lastname" placeholder="Last Name" required
+                   class="w-full mt-3 px-3 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500"/>
+
+            <!-- Hidden Download Content -->
+            <input type="hidden" name="downcontent" value="{{ downloadable_content }}">
+            <input type="hidden" name="slug" value="{{ slug }}">
+
+
+            <!-- Preferred Topics -->
+            <select name="preferred[]" class="w-full mt-3 px-3 py-2 border rounded-md">
+                <option value="" disabled selected>Select Preferred Topics</option>
+                <option value="topics">Topics</option>
+                <option value="issues">Issues</option>
+                <option value="visualisation">Visualisation</option>
+                <option value="data_card">Data Card</option>
+            </select>
+
+            <!-- Email -->
+            <input type="email" name="email" placeholder="Email Address" required
+                   class="w-full mt-3 px-3 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500"/>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="w-full mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500 transition">
+                Sign up & Download
+            </button>
+        </form>
+
+        <!-- Close Button -->
+        <button class="mt-4 text-gray-500 hover:text-gray-700 w-full" @click="modals.download = false">Close</button>
+    </div>
+</div>
+
+
+<script>
+  function disableSubmit(form) {
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.innerText = 'Submitting...';
+  }
+  </script>

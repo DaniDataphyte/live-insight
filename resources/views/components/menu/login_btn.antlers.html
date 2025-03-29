@@ -1,0 +1,13 @@
+{{# 
+<div>
+    <a href="/login" class="rounded-md px-3 py-1 text-sm font-semibold text-white bg-dataphyteblue">
+        Login
+    </a>
+</div> #}}
+
+<div x-data>
+    <button @click="Alpine.store('modalManager').openModal('login')"
+        class="rounded-md px-3 py-1 text-sm font-semibold text-white bg-dataphyteblue">
+        Login
+    </button>
+</div>

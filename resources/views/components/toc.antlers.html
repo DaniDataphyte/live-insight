@@ -1,0 +1,70 @@
+<!-- Add this script at the end of your file, before closing </body> tag -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all h2 and h3 elements from the content area
+    const content = document.querySelector('.content');
+    const headings = content.querySelectorAll('h2, h3');
+    const toc = document.getElementById('toc');
+
+    headings.forEach((heading, index) => {
+        // Generate unique ID if not present
+        if (!heading.id) {
+            heading.id = `section-${index}`;
+        }
+
+        // Create TOC item
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${heading.id}`;
+        a.textContent = heading.textContent;
+        a.className = 'hover:text-indigo-600';
+
+        // Add indent for h3
+        if (heading.tagName.toLowerCase() === 'h3') {
+            a.style.marginLeft = '1rem';
+            a.style.display = 'block';
+        }
+
+        // Add smooth scrolling
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        li.appendChild(a);
+        toc.appendChild(li);
+    });
+
+    // Highlight current section while scrolling
+    window.addEventListener('scroll', function() {
+        const headingElements = Array.from(headings);
+        const tocLinks = toc.querySelectorAll('a');
+
+        for (let i = 0; i < headingElements.length; i++) {
+            const heading = headingElements[i];
+            const nextHeading = headingElements[i + 1];
+
+            const headingTop = heading.offsetTop - 100;
+            const nextHeadingTop = nextHeading ? nextHeading.offsetTop - 100 : document.documentElement.scrollHeight;
+
+            if (window.scrollY >= headingTop && window.scrollY < nextHeadingTop) {
+                tocLinks.forEach(link => link.classList.remove('text-indigo-600', 'font-semibold'));
+                const correspondingLink = toc.querySelector(`a[href="#${heading.id}"]`);
+                if (correspondingLink) {
+                    correspondingLink.classList.add('text-indigo-600', 'font-semibold');
+                }
+                break;
+            }
+        }
+    });
+});
+
+
+
+document.getElementById("toggleToc").addEventListener("click", function() {
+    const tocContainer = document.getElementById("tocContainer");
+    tocContainer.classList.toggle("hidden");
+});
+</script>

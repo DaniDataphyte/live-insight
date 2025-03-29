@@ -1,0 +1,81 @@
+<div class="relative mb-5">
+    <!-- Heading Section -->
+    <div class="relative h-[300px] bg-cover bg-top overflow-hidden flex items-center justify-center"
+        style="background-image: url('{{ profile_display }}');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gray-800 bg-opacity-80"></div>
+        <div class="relative z-10 flex flex-col-2 items-center space-y-4">
+            <!-- Profile Image -->
+            <div class="rounded-md overflow-hidden flex-col-1">
+                <img src="{{ featured_image }}" alt="Profile Display" class="w-full h-[300px]  object-cover">
+            </div>
+            <!-- Name, Position, and Social Links -->
+            <div class="ml-6 text-white flex-col-1">
+                <h1 class="text-2xl font-semibold text-white">{{ title }}</h1>
+                <p class="text-sm text-gray-300">{{ position:label }}</p>
+                <div class="flex justify space-x-4 mt-4">
+                    {{ social_media_url }}
+                        {{facebook_link}}
+                        {{ twitter_link }}
+                    {{ /social_media_url }}
+                    <a href="#" class="text-gray-300 hover:text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                            <path
+                                d="M22.46 6.01c-.81.36-1.68.6-2.6.71a4.47 4.47 0 0 0 1.96-2.48 8.84 8.84 0 0 1-2.83 1.08 4.46 4.46 0 0 0-7.6 4.07 12.65 12.65 0 0 1-9.16-4.65 4.46 4.46 0 0 0 1.38 5.95c-.73-.02-1.42-.22-2.02-.56v.06a4.46 4.46 0 0 0 3.57 4.37 4.5 4.5 0 0 1-2.02.08 4.46 4.46 0 0 0 4.16 3.1 8.95 8.95 0 0 1-5.56 1.92A9.04 9.04 0 0 1 0 18.13a12.63 12.63 0 0 0 6.85 2.01c8.22 0 12.72-6.8 12.72-12.71 0-.19 0-.37-.01-.55a9.11 9.11 0 0 0 2.23-2.32z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-blue-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                            <path
+                                d="M12 2.04c5.5 0 10 4.48 10 10s-4.5 10-10 10-10-4.48-10-10 4.5-10 10-10m0-2.04c-6.63 0-12 5.37-12 12s5.37 12 12 12 12-5.37 12-12-5.37-12-12-12zm1.9 17.5h-3.8v-7.48h-2.1v-2.62h2.1v-1.73c0-2.07 1.26-3.21 3.11-3.21.88 0 1.63.06 1.85.09v2.14h-1.27c-1 0-1.19.47-1.19 1.16v1.56h2.4l-.31 2.62h-2.09v7.48z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-pink-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                            <path
+                                d="M16 2.014c-1.24-.043-2.775.592-3.996 1.603-1.221-1.011-2.755-1.646-3.994-1.603-3.573.123-6.007 3.22-6.007 7.402 0 7.297 10.992 14.58 10.992 14.58s11.009-7.267 11.009-14.58c0-4.188-2.43-7.297-6.004-7.402zm-4.997 18.883s-9.992-6.816-9.992-12.468c0-3.63 2.063-5.707 4.742-5.707 1.335.008 2.641.671 3.585 1.826.942-1.155 2.256-1.819 3.585-1.826 2.683-.002 4.746 2.077 4.746 5.707 0 5.639-9.993 12.468-9.993 12.468z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bio Section -->
+    <div class="flex flex-col md:flex-row">
+        <!-- Left Spacer (Hidden on small screens) -->
+        <div class="w-1/6 md:w-2/6 hidden md:block"></div>
+    
+        <!-- Center Content -->
+        <div class="w-full md:w-2/6">
+            {{# <article class="container mx-auto p-4 md:p-8 bg-white rounded-md shadow-md">
+                <p class="text-base leading-relaxed text-gray-800 whitespace-pre-line">
+                    {{ bio | strip_tags,  }}
+                </p>
+            </article> #}}
+            <article class="prose prose-lg max-w-none [&>*]:mb-6 [&>h2]:mt-10 [&>h3]:mt-8">
+                <div class="content">
+                    {{ if bio | is_array }}
+                    {{ bio | bard_text }}
+                {{ elseif bio }}
+                    {{ bio }}
+                {{ else }}
+                    <p>No content available</p>
+                {{ /if }}
+                <!-- Additional Content Here -->
+                </div>
+            </article>
+            {{ social_media_url }}
+            {{ facebook_link }}
+            {{ twitter_link }}
+        {{ /social_media_url }}
+        </div>
+    
+        <!-- Right Spacer (Hidden on small screens) -->
+        <div class="w-1/6 md:w-2/6 hidden md:block"></div>
+    </div>
+    
+</div>

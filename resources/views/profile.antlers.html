@@ -1,0 +1,152 @@
+<div x-data="profileHandler()" x-init="loadProfile()" id="profile-page" class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <template x-if="userLoggedIn">
+        <div>
+            <!-- Header Section -->
+            <div class="text-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Welcome to Your Profile</h1>
+                <img 
+                    :src="photoURL" 
+                    alt="Profile Photo" 
+                    class="w-24 h-24 rounded-full mx-auto mt-4 border-2 border-gray-300"
+                />
+            </div>
+
+            <!-- Profile Info Section -->
+            <div class="mb-6">
+                <p class="text-lg font-semibold text-gray-700"><strong>Email:</strong> <span x-text="email"></span></p>
+                <p class="text-lg font-semibold text-gray-700"><strong>Name:</strong> <span x-text="fullname"></span></p>
+                <p class="text-xs text-gray-700"><strong>Bio:</strong> <span x-text="bio"></span></p>
+                <p class="text-xs text-gray-700"><strong>Date of Birth:</strong> <span x-text="dob"></span></p>
+                <p class="text-xs text-gray-700"><strong>Profession:</strong> <span x-text="profession"></span></p>
+            </div>
+
+            <!-- Update Profile Form -->
+            <div class="bg-gray-50 p-4 rounded-lg shadow-inner mb-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Update Profile</h2>
+                <form @submit.prevent="updateProfile" class="space-y-4">
+                    <!-- Profile Photo Section -->
+                    <div class="text-center mb-6">
+                        <div class="relative w-24 h-24 mx-auto mt-4">
+                            <img 
+                                :src="photoURL || '/assets/defaults/default-profile.png'" 
+                                alt="Profile Photo" 
+                                class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 bg-gray-400"
+                            />
+                            <div 
+                                class="absolute inset-0 rounded-full bg-black bg-opacity-50 opacity-0 hover:opacity-100 flex items-center justify-center transition-opacity duration-200"
+                                @click="document.getElementById('photo-upload').click()"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <input 
+                            type="file" 
+                            id="photo-upload" 
+                            accept="image/*"
+                            class="hidden"
+                            @change="handlePhotoUpload($event)"
+                        />
+                        <div x-show="uploadProgress > 0" class="mt-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-blue-600 h-2.5 rounded-full" :style="'width: ' + uploadProgress + '%'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="fullname" class="block text-gray-600 font-medium">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="fullname" 
+                            x-model="fullname" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none" 
+                            placeholder="Enter Full Name" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="profession" class="block text-gray-600 font-medium">Profession</label>
+                        <input 
+                            type="text" 
+                            id="profession" 
+                            x-model="profession" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none" 
+                            placeholder="profession" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="dob" class="block text-gray-600 font-medium">Date 0f Birth</label>
+                        <input 
+                            type="date" 
+                            id="dob" 
+                            x-model="dob" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none" 
+                            placeholder="dob" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="bio" class="block text-gray-600 font-medium">Bio</label>
+                        <textarea 
+                            id="bio" 
+                            x-model="bio" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 focus:outline-none" 
+                            placeholder="Write a brief bio" 
+                            required
+                        ></textarea>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full bg-indigo-600 text-white font-medium py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    >
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <!-- Change Password Form -->
+            <div class="bg-gray-50 p-4 rounded-lg shadow-inner">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Change Password</h2>
+                <form @submit.prevent="changePassword" class="space-y-4">
+                    <div>
+                        <label for="current-password" class="block text-gray-600 font-medium">Current Password</label>
+                        <input 
+                            type="password" 
+                            id="current-password" 
+                            x-model="currentPassword" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-400 focus:outline-none" 
+                            placeholder="Enter Current Password" 
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <label for="new-password" class="block text-gray-600 font-medium">New Password</label>
+                        <input 
+                            type="password" 
+                            id="newPassword" 
+                            x-model="newPassword" 
+                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-400 focus:outline-none" 
+                            placeholder="Enter New Password" 
+                            required 
+                        />
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full bg-red-600 text-white font-medium py-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+                    >
+                        Change Password
+                    </button>
+                </form>
+            </div>
+        </div>
+    </template>
+    
+    <template x-if="!userLoggedIn">
+        <div class="text-center">
+            <p class="text-lg text-gray-600">You need to log in to view this page.</p>
+        </div>
+    </template>
+</div>

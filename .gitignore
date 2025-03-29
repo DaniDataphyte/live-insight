@@ -1,0 +1,81 @@
+# Ignore PHP Unit cache files
+/.phpunit.cache
+/.phpunit.result.cache
+
+# Node.js dependencies
+/node_modules
+
+# Build and hot reload files
+/public/build
+/public/hot
+
+# Storage and vendor directories
+/public/storage
+/public/vendor/statamic
+/storage/*.key
+/storage/pail
+/vendor
+public/assets/
+
+# User-related files (potentially sensitive)
+/users
+
+# Environment files
+.env
+.env.backup
+.env.production
+
+# Config files
+config/comingback.php
+config/comingback2.php
+
+# Statamic and Simple Commerce content
+content/simple-commerce/
+
+# Database migrations
+database/migrations/2025_03_08_090405_create_customers_table.php
+database/migrations/2025_03_08_090405_create_orders_table.php
+database/migrations/2025_03_08_090405_create_status_log_table.php
+
+# Blueprints
+resources/blueprints/collections/customers/
+resources/blueprints/collections/orders/
+resources/blueprints/collections/products/
+resources/blueprints/collections/some-other-collection/
+
+# Preferences and views
+resources/preferences.yaml
+resources/views/orders/
+
+# Miscellaneous unnecessary files
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+.DS_Store
+
+# IDE and Editor config files
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+
+# Remove stray entry
+yyt
+
+
+# Allow empty directories by tracking .gitkeep files
+!content/assets/.gitkeeppublic/vendor/statamic-chatgpt/
+public/vendor/statamic-redirect/
+public/vendor/statamic-chatgpt/
+public/vendor/statamic-redirect/
+storage/
+MYSQL/
+
+
+
+
+# Ignore all files inside the assets directory
+content/assets/*

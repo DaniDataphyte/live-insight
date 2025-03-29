@@ -1,0 +1,49 @@
+{{ posts }}
+<!-- First Column -->
+<div class="col-span-6 md:col-span-3 bg-gray-100 shadow-md rounded-lg w-full bg-white">
+    <div class="flex flex-col sm:flex-row w-full">
+        <!-- Inner Column (Image Section) -->
+        <div class="basis-[50%]">
+            <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
+                    @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">
+                {{ if featured_image }}
+                    <img src="{{ featured_image }}" alt="Article Image"
+                        class="w-full h-[200px] sm:h-[300px] md:h-[350px] object-cover rounded-md transition-transform transform hover:scale-105 duration-300">
+                {{ else }}
+                    <img src="{{ portrait_default_image:portrait_image  }}" alt="Default Image"
+                        class="w-full h-[200px] sm:h-[300px] md:h-[350px] object-cover rounded-md transition-transform transform hover:scale-105 duration-300">
+                {{ /if }}
+            </a>
+        </div>
+        <!-- Inner Column (Text Section) -->
+        <div class="basis-[50%] p-5">
+            <div class="space-y-3 pt-2">
+                <p class="text-xs uppercase">
+
+                    {{ if issues_categories }}
+                    {{ issues_categories }}
+                    <a href="{{ url }}">{{ title }}</a>
+                    {{ /issues_categories }}
+                    {{ else }}
+                    ...
+                    {{ /if }}
+                </p>
+                <h3 class="text-xl font-semibold">
+                    <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
+                    @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">{{ title }}</a>
+                </h3>
+                <p class="text-xs" alt="Author">
+                    {{ author }} {{ name }} {{ /author }}
+                </p>
+                <p class="text-sm leading-6 line-clamp-5">
+                    {{ if content | is_array }}
+                        {{ content | bard_text | strip_tags }}...
+                    {{ else }}
+                        {{ content | strip_tags }}...
+                    {{ /if }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{{ /posts }}

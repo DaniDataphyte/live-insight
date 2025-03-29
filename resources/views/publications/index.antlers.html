@@ -1,0 +1,92 @@
+<div class="bg-white py-20">
+    <!-- Page Header -->
+    <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-gray-900 md:text-4xl">
+            Explore Our Publications
+        </h2>
+        <p class="mt-3 text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+            Dive into a collection of well-researched articles and resources designed to empower decision-making.
+        </p>
+    </div>
+</div>
+
+<!-- Publications List -->
+<div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+        
+        {{ collection:publications paginate="12" as="posts" sort="date:desc" }}
+
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {{ posts }}
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col min-h-full transition hover:shadow-xl">
+                
+                <!-- Featured Image -->
+                <div class="relative w-full bg-gray-200 aspect-video">
+                    {{ if featured_image }}
+                        <img src="{{ featured_image }}" alt="{{ title }}" class="w-full h-full object-cover">
+                    {{ else }}
+                        <div class="flex items-center justify-center h-full bg-gray-300">
+                            <span class="text-gray-500">No Image Available</span>
+                        </div>
+                    {{ /if }}
+                </div>
+
+                <!-- Post Content -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="text-lg font-bold text-gray-900">
+                        <a href="{{ url }}" class="hover:text-blue-600">{{ title }}</a>
+                    </h3>
+                    {{# <p class="text-gray-500 text-xs mt-1">Published on {{ date format="F j, Y" }}</p> #}}
+
+                    <!-- Tags -->
+                    {{ if tags }}
+                    <p class="text-xs text-gray-700 mt-2">
+                        <span class="font-semibold">Tags:</span> 
+                        {{ tags limit="3" }}
+                            <a href="{{ url }}" class="text-blue-600 hover:underline">{{ title }}</a>{{ if not last }}, {{ /if }}
+                        {{ /tags }}
+                    </p>
+                    {{ /if }}
+
+                    <!-- Excerpt -->
+                    <p class="text-gray-600 text-sm mt-3 flex-grow">
+                        {{ content | truncate:120 }}
+                    </p>
+
+                    <div class="mt-3">
+                        <a href="{{ url }}" class="text-blue-600 font-semibold hover:underline text-sm">Read More →</a>
+                    </div>
+                </div>
+                
+            </div>
+            {{ /posts }}
+        </div>
+
+        <!-- Pagination (Inside Container) -->
+        {{ paginate }}
+        <div class="container mx-auto px-6 md:px-12 lg:px-16">
+            <div class="flex items-center justify-between mt-12 border-t pt-6">
+                <p class="text-sm text-gray-700">
+                    Page <span class="font-semibold">{{ current_page }}</span> of <span class="font-semibold">{{ total_pages }}</span> 
+                    | Showing <span class="font-semibold">{{ total_results }}</span> Articles
+                </p>
+                <div class="flex gap-3">
+                    {{ if prev_page }}
+                    <a href="{{ prev_page }}" class="px-5 py-2 text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                        Previous
+                    </a>
+                    {{ /if }}
+                    {{ if next_page }}
+                    <a href="{{ next_page }}" class="px-5 py-2 text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition">
+                        Next
+                    </a>
+                    {{ /if }}
+                </div>
+            </div>
+        </div>
+        {{ /paginate }}
+
+        {{ /collection:publications }}
+    </div>
+</div>

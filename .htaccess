@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Make sure directory listings are disabled
+    Options -Indexes
+    # Route requests to index.php if the requested file doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# PHP handler - Adjust to your PHP version if needed
+<IfModule mime_module>
+    AddHandler application/x-httpd-ea-php74___lsphp .php .php5 .phtml
+</IfModule>

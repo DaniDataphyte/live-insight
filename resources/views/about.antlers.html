@@ -1,0 +1,239 @@
+<div class="bg-gray-50 text-gray-900">
+    <div class="bg-cover bg-top w-full h-full" style="background-image: url('assets/dataphyte-group-picture.jpeg');">
+        <!-- Hero Section -->
+        <section class="relative bg-dataphyteblue bg-opacity-80 text-white py-24 px-4 text-center">
+            <h1 class="text-4xl font-extrabold">Dataphyte Insight</h1>
+            <p class="mt-4 text-lg">A think-tank, offering data-driven socio-economic insight and research using
+                technology tools</p>
+        </section>
+
+        <!-- About Dataphyte -->
+        <section class="relative bg-black bg-opacity-60 text-white py-24 px-4 text-center ">
+            <h2 class="text-3xl font-bold pb-10">Who We Are</h2>
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-5xl mx-auto">
+                <p>
+                    Dataphyte collects and transforms data into accessible formats, producing insights and interactive
+                    visualisations to improve decision-making. It provides access to data useful for the public,
+                    private, and
+                    development sectors.
+                </p>
+                <p>
+                    Our goal is to fill the lacuna in data accessibility, especially in formats that support governance,
+                    policy
+                    analysis, and accountability work in Nigeria. Without doubt, policy and development planning is
+                    currently
+                    based on outdated datasets and often extrapolated estimates. As an intervention, Dataphyte was
+                    launched to
+                    provide the accountability and policy sectors with cleaner, analysed, easily accessible, and usable
+                    data
+                    to drive democracy and development in Nigeria.
+                </p>
+            </div>
+        </section>
+
+
+
+        <!-- Editorial Philosophy -->
+
+        <section class="px-4 bg-gray-100 bg-opacity-90 py-10">
+            <div class="mx-auto max-w-6xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" x-data="{ openItem: null }">
+                    <!-- Text Content (Left) -->
+                    <div>
+                        <ul class="mt-4 space-y-4">
+                            <div>
+                                <h2 class="text-3xl font-bold text-gray-800">Editorial Philosophy</h2>
+                                <p class="mt-4 text-gray-700">
+                                    Our organisation is envisioned to serve the public and the corporate sector with the
+                                    right
+                                    data and
+                                    information service to power their growth and development. We decide the content of
+                                    our data
+                                    journalism by asking ourselves the following questions:
+                                </p>
+                            </div>
+                            <!-- Item 1 -->
+                            <li>
+                                <button @click="openItem === 1 ? openItem = null : openItem = 1"
+                                    class="cursor-pointer font-medium hover:text-dataphyteblue transition flex items-center gap-2 w-full"
+                                    aria-expanded="false">
+                                    <span
+                                        class="border p-3 rounded-md bg-gray-50 text-dataphyteblue hover:text-white hover:bg-dataphyteblue flex items-center justify-between w-full">
+                                        <span>Does it represent the values of our national life?</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            :class="openItem === 1 ? 'rotate-90' : 'rotate-0'"
+                                            class="w-6 h-6 transition-transform flex-shrink-0">
+                                            <path fill-rule="evenodd"
+                                                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <p x-show="openItem === 1" x-transition.opacity x-collapse
+                                    class="text-gray-600 mt-2 pl-4">
+                                    We strive to deliver content that promotes these values and our nation's dynamic
+                                    cultures.
+                                    We allow the Constitution, the people it is written to protect, and their
+                                    socio-economic
+                                    realities to define our content.
+                                </p>
+                            </li>
+
+                            <!-- Item 2 -->
+                            <li>
+                                <button @click="openItem === 2 ? openItem = null : openItem = 2"
+                                    class="cursor-pointer font-medium hover:text-dataphyteblue transition flex items-center gap-2 w-full"
+                                    aria-expanded="false">
+                                    <span
+                                        class="border p-3 rounded-md bg-gray-50 text-dataphyteblue hover:text-white hover:bg-dataphyteblue flex items-center justify-between w-full">
+                                        <span>Does it resonate with our team?</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            :class="openItem === 2 ? 'rotate-90' : 'rotate-0'"
+                                            class="w-6 h-6 transition-transform flex-shrink-0">
+                                            <path fill-rule="evenodd"
+                                                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <p x-show="openItem === 2" x-transition.opacity x-collapse
+                                    class="text-gray-600 mt-2 pl-4">
+                                    We enshrine a team culture! So, we curate a story pot and decide together what story
+                                    we
+                                    should tell, how and when.
+                                </p>
+                            </li>
+
+                            <!-- Item 3 -->
+                            <li>
+                                <button @click="openItem === 3 ? openItem = null : openItem = 3"
+                                    class="cursor-pointer font-medium hover:text-dataphyteblue transition flex items-center gap-2 w-full"
+                                    aria-expanded="false">
+                                    <span
+                                        class="border p-3 rounded-md bg-gray-50 text-dataphyteblue hover:text-white hover:bg-dataphyteblue flex items-center justify-between w-full">
+                                        <span>Does it reflect true humanity?</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            :class="openItem === 3 ? 'rotate-90' : 'rotate-0'"
+                                            class="w-6 h-6 transition-transform flex-shrink-0">
+                                            <path fill-rule="evenodd"
+                                                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <p x-show="openItem === 3" x-transition.opacity x-collapse
+                                    class="text-gray-600 mt-2 pl-4">
+                                    We allow ourselves to listen to people’s expressions of passion, pleasantness,
+                                    pressure, and
+                                    pains.
+                                    We strive to animate them and look through the lens of data to help us promote the
+                                    true
+                                    value of each situation.
+                                </p>
+                            </li>
+
+                            <!-- Item 4 -->
+                            <li>
+                                <button @click="openItem === 4 ? openItem = null : openItem = 4"
+                                    class="cursor-pointer font-medium hover:text-dataphyteblue transition flex items-center gap-2 w-full"
+                                    aria-expanded="false">
+                                    <span
+                                        class="border p-3 rounded-md bg-gray-50 text-dataphyteblue hover:text-white hover:bg-dataphyteblue flex items-center justify-between w-full">
+                                        <span>Does it respond to the quest for inclusion and equality?</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            :class="openItem === 4 ? 'rotate-90' : 'rotate-0'"
+                                            class="w-6 h-6 transition-transform flex-shrink-0">
+                                            <path fill-rule="evenodd"
+                                                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </button>
+                                <p x-show="openItem === 4" x-transition.opacity x-collapse
+                                    class="text-gray-600 mt-2 pl-4">
+                                    We deliberately seek to promote inclusion and equality across the dimensions of
+                                    gender,
+                                    ethnicity, abilities, and social strata.
+                                    We generate conversations that present today’s realities and promote dialogue that
+                                    defines
+                                    our tomorrow.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Image (Right) -->
+                    <div class="flex justify-center p-10">
+                        <img src="assets/growth-ext.png" alt="Editorial Philosophy"
+                            class="rounded-lg border border-gray-200 bg-black bg-opacity-30 grayscale hover:grayscale-0 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Mandate Section -->
+    <section class="max-w-6xl mx-auto px-4 py-12 text-gray-800">
+        <h2 class="text-3xl font-bold text-gray-800">Our Mandate</h2>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="hover:bg-emerald-600 shadow p-6 rounded-lg hover:text-white transition ease-in-out duration-600">
+                <div class="flex items-center gap-3 pb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clip-rule="evenodd" />
+                        <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+                      </svg>                      
+                    <h3 class="text-xl font-semibold">Data Journalism</h3>
+                </div>
+                <p class="text-sm">Digest compelling data-driven narratives that explain trends, and present them as intelligent information useful to make informed decisions and demand accountability
+                </p>
+            </div>
+    
+            <div class="hover:bg-red-500 shadow p-6 rounded-lg hover:text-white transition ease-in-out duration-600">
+                <div class="flex items-center gap-3 pb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path fill-rule="evenodd"
+                            d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.04 16.5.5-1.5h6.42l.5 1.5H8.29Zm7.46-12a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6Zm-3 2.25a.75.75 0 0 0-1.5 0v3.75a.75.75 0 0 0 1.5 0V9Zm-3 2.25a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0v-1.5Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h3 class="text-xl font-semibold">Interactive Visualizations</h3>
+                </div>
+                <p class="text-sm">Generate charts and maps from available datasets, download in multiple formats and embed directly into your reports or web projects in seconds</p>
+            </div>
+    
+            <div class="hover:bg-orange-500 shadow p-6 rounded-lg hover:text-white transition ease-in-out duration-600">
+                <div class="flex items-center gap-3 pb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path d="M18 1.5c2.9 0 5.25 2.35 5.25 5.25v3.75a.75.75 0 0 1-1.5 0V6.75a3.75 3.75 0 1 0-7.5 0v3a3 3 0 0 1 3 3v6.75a3 3 0 0 1-3 3H3.75a3 3 0 0 1-3-3v-6.75a3 3 0 0 1 3-3h9v-3c0-2.9 2.35-5.25 5.25-5.25Z" />
+                      </svg>
+                      
+                    <h3 class="text-xl font-semibold">Machine-readable Datasets</h3>
+                </div>
+                <p class="text-sm">Access downloadable data curated from government and non government sources in ready to use formats for your storytelling, research and analysis purposes.</p>
+            </div>
+    
+            <div class="hover:bg-dataphyteblue shadow p-6 rounded-lg hover:text-white transition ease-in-out duration-600">
+                <div class="flex items-center gap-3 pb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
+                        <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+                      </svg>
+                      
+                <h3 class="text-xl font-semibold">Data Journalists Hub</h3>
+                </div>
+                <p class="text-sm">Building a strong community of data journalists in Nigeria and across Africa.</p>
+                <p class="text-sm">You can also read more about our <a href="#" class="underline">Co-Working Space.</a></p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Contact Section -->
+    <section class="bg-dataphytered text-white py-12">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold">Get in Touch</h2>
+            <p class="mt-4">For advertising, partnerships, and promotions, reach us at:</p>
+            <p class="mt-2 font-semibold">admin@dataphyte.com | partners@dataphyte.com</p>
+            <p class="mt-2 font-semibold">Call: +234 811 666 5321</p>
+        </div>
+    </section>
+</div>

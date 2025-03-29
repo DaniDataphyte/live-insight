@@ -1,0 +1,251 @@
+{{# <div 
+    x-show="Alpine.store('modalManager').modals.login" 
+    @keydown.escape="Alpine.store('modalManager').closeModal('login')" 
+    @click.away="Alpine.store('modalManager').closeModal('login')"
+    class="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-60 z-50"
+    x-cloak
+>
+
+    <div class="bg-white rounded-lg shadow-lg w-full h-full max-w-3xl overflow-hidden relative flex flex-col">
+        <!-- Close Button -->
+        <button 
+            @click="Alpine.store('modalManager').closeModal('login')" 
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl"
+        >
+            &times;
+        </button>
+
+        <!-- Image Section -->
+        <div class="w-full h-64">
+            <img 
+                src="https://placehold.co/1280x600/orange/white" 
+                alt="Login Illustration" 
+                class="w-full h-full object-cover"
+                loading="lazy"
+            />
+        </div>
+
+        <!-- Content Section -->
+        <div class="flex-1 flex flex-col justify-center items-center p-8">
+            <h2 class="text-3xl font-bold mb-4">Welcome Back</h2>
+            <p class="text-gray-600 mb-6">
+                Sign in to access your account.
+            </p>
+
+            <!-- Social Logins -->
+            <div class="w-full max-w-sm">
+                <p class="text-gray-500 text-center mb-4">Or continue with</p>
+                <div class="flex justify-center gap-4">
+                    <!-- Google -->
+                    <button type="button" id="google-login" 
+                        @click="$store.socialAuth.signInWithGoogle()" 
+                        class="flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 hover:bg-gray-50 transition">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                        </svg>
+                    </button>
+
+                    <!-- Facebook -->
+                    <button type="button" id="facebook-login" 
+                        class="flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 hover:bg-gray-50 transition">
+                        <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </button>
+
+                    <!-- Twitter -->
+                    <button type="button" id="twitter-login" 
+                        class="flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 hover:bg-gray-50 transition">
+                        <svg class="w-6 h-6" fill="#1DA1F2" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> #}}
+
+
+
+
+
+<div 
+    x-show="Alpine.store('modalManager').modals.login" 
+    @keydown.escape="Alpine.store('modalManager').closeModal('login')" 
+    @click.away="Alpine.store('modalManager').closeModal('login')"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" 
+    x-cloak>
+
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+        <button @click="Alpine.store('modalManager').closeModal('login')" 
+            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+            &times;
+        </button>
+
+        <div class="text-center flex flex-col items-center justify-center">
+            <div class="w-40 h-auto mb-4">
+                <a href="{{ logo:homelink }}">
+                    {{ logo:logo_svg }}
+                </a>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
+            <p class="text-gray-600 mb-6">
+                Sign in to explore exclusive, data-driven insights and in-depth articles.
+            </p>
+        </div>
+
+        <form x-data="emailAuth()" @submit.prevent="handleLogin">
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                <input type="email" id="email"
+                    x-model="loginForm.email"
+                    class="w-full border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your email">
+                <p x-show="formErrors.email" x-text="formErrors.email" class="text-red-500 text-sm mt-1"></p>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                <input type="password" id="password"
+                    x-model="loginForm.password"
+                    class="w-full border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your password">
+                <p x-show="formErrors.password" x-text="formErrors.password" class="text-red-500 text-sm mt-1"></p>
+            </div>
+
+            <div class="flex justify-between items-center mb-6">
+                <a href="#" @click.prevent="Alpine.store('modalManager').openModal('passwordReset')" 
+                    class="text-blue-500 hover:underline">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-lg mb-4">
+                Continue
+            </button>
+        </form>
+
+        <p class="text-center text-gray-600 mb-4">
+            Don't have an account? 
+            <button @click="Alpine.store('modalManager').openModal('signup')" 
+                class="text-blue-500 hover:underline">
+                Sign up
+            </button>
+        </p>
+
+        <div class="text-center">
+            <p class="text-gray-500 mb-4">Or continue with</p>
+            <div class="flex justify-center gap-4">
+                <button type="button" id="google-login" @click="$store.socialAuth.signInWithGoogle()" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                </button>
+                {{# <button type="button" id="facebook-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                    <svg class="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </button>
+                <button type="button" id="twitter-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                    <svg class="w-5 h-5" fill="#1DA1F2" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                </button>
+                <button type="button" id="yahoo-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#410093">
+                        <path d="M13.131.053L9.291 9.866l-3.909-9.813H0l7.291 17.485-2.892 6.555h5.096L19.86.053"/>
+                    </svg>
+                </button> #}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{# <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+
+    <button @click="closeModal('login')" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+        &times;
+    </button>
+
+    <div class="text-center flex flex-col items-center justify-center">
+        <div class="w-40 h-auto mb-4">
+            <a href="{{ logo:homelink }}">
+                {{ logo:logo_svg }}
+            </a>
+        </div>
+        <h2 class="text-2xl font-bold mb-2">Welcome</h2>
+        <p class="text-gray-600 mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+        </p>
+    </div>
+
+    <form x-data="emailAuth()" @submit.prevent="handleLogin">
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+            <input type="email" id="email"
+                x-model="loginForm.email"
+                class="w-full border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your email">
+            <p x-show="formErrors.email" x-text="formErrors.email" class="text-red-500 text-sm mt-1"></p>
+        </div>
+
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+            <input type="password" id="password"
+                x-model="loginForm.password"
+                class="w-full border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your password">
+            <p x-show="formErrors.password" x-text="formErrors.password" class="text-red-500 text-sm mt-1"></p>
+        </div>
+
+        <div class="flex justify-between items-center mb-6">
+            <a href="#" @click.prevent="openModal('passwordReset')" class="text-blue-500 hover:underline">Forget Password?</a>
+        </div>
+
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-lg mb-4">
+            Continue
+        </button>
+    </form>
+
+    <p class="text-center text-gray-600 mb-4">
+        Don't have an account? <a href="#" @click="openModal('signup')" class="text-blue-500 hover:underline">Sign up</a>
+    </p>
+
+    <div class="text-center">
+        <p class="text-gray-500 mb-4">Or continue with</p>
+        <div class="flex justify-center gap-4">
+            <button type="button" id="google-login" @click="signInWithGoogle()" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                </svg>
+            </button>
+            <button type="button" id="facebook-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </button>
+            <button type="button" id="twitter-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="#1DA1F2" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+            </button>
+            <button type="button" id="yahoo-login" class="flex items-center justify-center w-12 h-12 rounded-full border border-gray-300 hover:bg-gray-50">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#410093">
+                    <path d="M13.131.053L9.291 9.866l-3.909-9.813H0l7.291 17.485-2.892 6.555h5.096L19.86.053"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div> #}}

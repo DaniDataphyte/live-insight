@@ -1,0 +1,16 @@
+{{ partial:partials/head }}
+
+<header>
+    <div class="">
+    {{ partial:partials/navbar }}
+    </div>
+</header>
+
+<main>
+    <div x-data="articleAccess()">
+
+    {{ template_content }}
+</div>
+</main>
+
+{{ partial:partials/footer }}

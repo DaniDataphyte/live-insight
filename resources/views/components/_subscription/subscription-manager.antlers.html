@@ -1,0 +1,284 @@
+<div class="subscription-manager" 
+    x-data="{ 
+        activeTab: 'plans',
+        processing: false,
+        selectedPlan: null,
+        showConfirmation: false,
+        currentPlan: {{ current_user:subscription:plan | json }},
+        usage: {
+            freeArticles: {{ current_user:free_articles_count }},
+            premiumArticles: {{ current_user:premium_articles_count }}
+        }
+    }">
+
+    {{# Navigation Tabs #}}
+    <nav class="subscription-tabs">
+        <button 
+            class="tab" 
+            :class="{ 'active': activeTab === 'plans' }"
+            @click="activeTab = 'plans'">
+            Subscription Plans
+        </button>
+        <button 
+            class="tab"
+            :class="{ 'active': activeTab === 'usage' }"
+            @click="activeTab = 'usage'">
+            Usage Statistics
+        </button>
+        <button 
+            class="tab"
+            :class="{ 'active': activeTab === 'payment' }"
+            @click="activeTab = 'payment'">
+            Payment Methods
+        </button>
+        <button 
+            class="tab"
+            :class="{ 'active': activeTab === 'history' }"
+            @click="activeTab = 'history'">
+            Transaction History
+        </button>
+    </nav>
+
+    {{# Plans Tab #}}
+    <div x-show="activeTab === 'plans'" x-cloak>
+        <div class="plans-grid">
+            {{ subscription_plans }}
+                <div class="plan-card" 
+                    :class="{ 'selected': selectedPlan === '{{ handle }}' }"
+                    @click="selectedPlan = '{{ handle }}'">
+                    <h3>{{ name }}</h3>
+                    <div class="price">₦{{ price }}</div>
+                    <ul class="features">
+                        {{ features }}
+                            <li>{{ value }}</li>
+                        {{ /features }}
+                    </ul>
+                    <button class="select-plan-btn"
+                            @click="showConfirmation = true"
+                            :disabled="currentPlan === '{{ handle }}'">
+                        {{ if currentPlan === handle }}
+                            Current Plan
+                        {{ else }}
+                            {{ if price > current_user:subscription:price }}
+                                Upgrade
+                            {{ else }}
+                                Switch Plan
+                            {{ /if }}
+                        {{ /if }}
+                    </button>
+                </div>
+            {{ /subscription_plans }}
+        </div>
+    </div>
+
+    {{# Usage Statistics Tab #}}
+    <div x-show="activeTab === 'usage'" x-cloak>
+        <div class="usage-stats">
+            <div class="stat-card">
+                <h3>Free Articles</h3>
+                <div class="stat-value">
+                    {{ current_user:free_articles_count }} / {{ current_user:subscription:free_article_limit }}
+                </div>
+                <div class="progress-bar" 
+                    :style="{ width: (usage.freeArticles/{{ current_user:subscription:free_article_limit }})*100 + '%' }">
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Premium Articles</h3>
+                <div class="stat-value">
+                    {{ current_user:premium_articles_count }} / {{ current_user:subscription:premium_article_limit }}
+                </div>
+                <div class="progress-bar"
+                    :style="{ width: (usage.premiumArticles/{{ current_user:subscription:premium_article_limit }})*100 + '%' }">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{# Payment Methods Tab #}}
+    <div x-show="activeTab === 'payment'" x-cloak>
+        <div class="payment-methods">
+            {{ user:payment_methods }}
+                <div class="payment-method-card">
+                    <div class="card-info">
+                        <span class="card-brand">{{ brand }}</span>
+                        <span class="card-last4">**** **** **** {{ last4 }}</span>
+                        <span class="card-expiry">{{ expiry }}</span>
+                    </div>
+                    <button class="remove-card-btn"
+                            @click="removePaymentMethod('{{ id }}')"
+                            :disabled="processing">
+                        Remove
+                    </button>
+                </div>
+            {{ /user:payment_methods }}
+            
+            <button class="add-payment-btn"
+                    @click="initializePaystack"
+                    :disabled="processing">
+                Add New Payment Method
+            </button>
+        </div>
+    </div>
+
+    {{# Transaction History Tab #}}
+    <div x-show="activeTab === 'history'" x-cloak>
+        <div class="transaction-history">
+            {{ collection:transactions 
+            author:is="current_user"
+            sort="created_at:desc" }}
+                <div class="transaction-item">
+                    <div class="transaction-date">
+                        {{ created_at format="M j, Y" }}
+                    </div>
+                    <div class="transaction-amount">
+                        ₦{{ amount }}
+                    </div>
+                    <div class="transaction-status {{ status }}">
+                        {{ status }}
+                    </div>
+                    <div class="transaction-reference">
+                        REF: {{ reference }}
+                    </div>
+                </div>
+            {{ /collection:transactions }}
+        </div>
+    </div>
+
+    {{# Plan Change Confirmation Modal #}}
+    <div x-show="showConfirmation" 
+        class="modal-overlay"
+        @click="showConfirmation = false">
+        <div class="modal-content" @click.stop>
+            <h3>Confirm Subscription Change</h3>
+            <p>Are you sure you want to change your subscription plan?</p>
+            <div class="modal-actions">
+                <button class="cancel-btn" 
+                        @click="showConfirmation = false">
+                    Cancel
+                </button>
+                <button class="confirm-btn"
+                        @click="confirmPlanChange"
+                        :disabled="processing">
+                    <span x-show="!processing">Confirm</span>
+                    <span x-show="processing">Processing...</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function initializePaystack() {
+    const handler = PaystackPop.setup({
+        key: '{{ config:services:paystack:public_key }}',
+        email: '{{ current_user:email }}',
+        amount: selectedPlan ? plans[selectedPlan].price * 100 : 0,
+        currency: 'NGN',
+        ref: 'SUB_' + Math.floor((Math.random() * 1000000000) + 1),
+        callback: function(response) {
+            processSubscription(response);
+        },
+        onClose: function() {
+            console.log('Payment window closed');
+        }
+    });
+    handler.openIframe();
+}
+
+async function processSubscription(response) {
+    this.processing = true;
+    try {
+        const result = await fetch('/subscription/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                reference: response.reference,
+                plan: this.selectedPlan
+            })
+        });
+        
+        if (result.ok) {
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error('Subscription processing failed:', error);
+    } finally {
+        this.processing = false;
+    }
+}
+</script>
+
+<style>
+.subscription-manager {
+    @apply max-w-4xl mx-auto p-6;
+}
+
+.subscription-tabs {
+    @apply flex space-x-4 mb-8;
+}
+
+.tab {
+    @apply px-4 py-2 rounded-lg transition-colors;
+}
+
+.tab.active {
+    @apply bg-primary text-white;
+}
+
+.plans-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.plan-card {
+    @apply border rounded-lg p-6 text-center transition-shadow hover:shadow-lg cursor-pointer;
+}
+
+.plan-card.selected {
+    @apply border-primary;
+}
+
+.usage-stats {
+    @apply space-y-6;
+}
+
+.stat-card {
+    @apply bg-white rounded-lg p-6 shadow-sm;
+}
+
+.progress-bar {
+    @apply bg-primary h-2 rounded-full transition-all;
+}
+
+.payment-methods {
+    @apply space-y-4;
+}
+
+.payment-method-card {
+    @apply flex justify-between items-center bg-white p-4 rounded-lg shadow-sm;
+}
+
+.transaction-history {
+    @apply space-y-4;
+}
+
+.transaction-item {
+    @apply flex justify-between items-center bg-white p-4 rounded-lg shadow-sm;
+}
+
+.modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modal-content {
+    @apply bg-white rounded-lg p-6 max-w-md w-full;
+}
+
+.modal-actions {
+    @apply flex justify-end space-x-4 mt-6;
+}
+</style>
+

@@ -1,0 +1,46 @@
+<div class="container mx-auto">
+    <div class="mx-5 pb-10">
+        <div class="grid grid-cols md:grid-cols-3 gap-12">
+
+            {{ posts }}
+            <div x-data="articleAccess()">
+
+                <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
+                    @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">
+
+                    <img src="{{ featured_image ?? landscape_default_image:landscape_image }}"
+                        alt="{{ featured_image:alt }}"
+                        class="w-full h-[250px] object-cover rounded-md mb-4 transition-transform transform hover:scale-105 duration-300">
+                </a>
+
+                <p class="text-xs uppercase mb-2 space-x-2">
+                    {{ if topics_categories }}
+                    {{ topics_categories }}<a href="{{ url }}">{{ title }}</a>{{ /topics_categories }}
+                    {{ /if }}
+                </p>
+                {{ access_level }}<p class="text-xs uppercase mb-2 space-x-2">Access Level: {{ title }}</p>{{
+                /access_level }}
+
+                <a href="#" x-bind:data-access-level="'{{ access_level:slug | raw }}'"
+                    @click.prevent="handlePostClick($event.currentTarget.dataset.accessLevel, '{{ url }}')">
+
+                    <h3 class="font-bold text-lg mb-2 text-gray-900">{{ title }}</h3>
+                </a>
+                <p class="text-xs mb-2" alt="Author">{{ author }} {{ name }} {{ /author }}</p>
+                <p class="text-base tracking-tight line-clamp-2">
+                    {{ if content | is_array }}
+                    {{ content | bard_text | strip_tags }}...
+                    {{ else }}
+                    {{ content | strip_tags }}...
+                    {{ /if }}
+                </p>
+            </div>
+            {{ /posts }}
+
+            <!-- Static content -->
+            <div class="flex flex-col">
+                {{ partial:partials/post_cards/post_ad }}
+            </div>
+        </div>
+    </div>
+</div>

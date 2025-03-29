@@ -1,0 +1,108 @@
+{{# Article access component with subscription checks and paywall functionality #}}
+<div x-data="{
+    showPaywall: false,
+    loading: true,
+    articleAccess: null,
+    remainingArticles: 0,
+    subscriptionStatus: null
+}" 
+x-init="() => {
+    loading = true;
+    articleAccess = await $fetch('/api/article-access/{{ id }}');
+    remainingArticles = articleAccess.remaining;
+    subscriptionStatus = articleAccess.subscription;
+    showPaywall = !articleAccess.canAccess;
+    loading = false;
+}"
+class="relative">
+    {{# Loading state #}}
+    <div x-show="loading" class="w-full h-64 animate-pulse bg-gray-100 rounded-lg"></div>
+
+    {{# Article content #}}
+    <article x-show="!loading && !showPaywall" class="prose max-w-none">
+        {{ content }}
+    </article>
+
+    {{# Paywall for premium content #}}
+    <div x-show="!loading && showPaywall" 
+        class="relative border rounded-lg p-8 bg-gray-50"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 transform -translate-y-4"
+        x-transition:enter-end="opacity-100 transform translate-y-0">
+        
+        {{# Guest user view #}}
+        {{ if ! user }}
+            <div class="text-center space-y-4">
+                <h3 class="text-xl font-bold">Subscribe to Continue Reading</h3>
+                <p class="text-gray-600">Create an account to read this premium article and get unlimited access.</p>
+                <div class="space-x-4">
+                    <a href="{{ route:register }}" class="btn-primary">Register Now</a>
+                    <a href="{{ route:login }}" class="btn-secondary">Sign In</a>
+                </div>
+            </div>
+        {{ /if }}
+
+        {{# Authenticated user view #}}
+        {{ if user }}
+            <div class="text-center space-y-4">
+                <template x-if="subscriptionStatus === 'none'">
+                    <div>
+                        <h3 class="text-xl font-bold">Upgrade to Premium</h3>
+                        <p class="text-gray-600">
+                            You've read <span x-text="articleAccess.readCount"></span> articles this month.
+                            <br>Upgrade to continue reading premium content.
+                        </p>
+                        <div class="mt-4">
+                            <a href="{{ route:subscription.plans }}" class="btn-primary">View Plans</a>
+                        </div>
+                    </div>
+                </template>
+
+                <template x-if="subscriptionStatus === 'basic'">
+                    <div>
+                        <h3 class="text-xl font-bold">Premium Article</h3>
+                        <p class="text-gray-600">
+                            You have <span x-text="remainingArticles"></span> premium articles remaining this month.
+                            <br>Upgrade to get unlimited premium access.
+                        </p>
+                        <div class="mt-4">
+                            <button 
+                                @click="$store.subscription.unlockArticle('{{ id }}')" 
+                                class="btn-primary"
+                                x-bind:disabled="remainingArticles <= 0">
+                                Read Article
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        {{ /if }}
+    </div>
+
+    {{# Article metadata #}}
+    <div class="mt-4 flex items-center justify-between text-sm text-gray-500">
+        <div>
+            <span class="mr-2">{{ date format="F j, Y" }}</span>
+            {{ if premium }}
+                <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs">Premium</span>
+            {{ /if }}
+        </div>
+        
+        {{# Share buttons #}}
+        <div class="flex space-x-4" x-show="!showPaywall">
+            <button @click="window.share('twitter')" class="hover:text-blue-500">
+                {{ svg src="social/twitter" class="w-5 h-5" }}
+            </button>
+            <button @click="window.share('facebook')" class="hover:text-blue-600">
+                {{ svg src="social/facebook" class="w-5 h-5" }}
+            </button>
+        </div>
+    </div>
+
+    {{# Error state #}}
+    <div x-show="error" 
+        x-text="error"
+        class="mt-4 p-4 bg-red-50 text-red-600 rounded-lg">
+    </div>
+</div>
+

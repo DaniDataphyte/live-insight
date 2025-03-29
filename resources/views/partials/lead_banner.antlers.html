@@ -1,0 +1,25 @@
+
+{{ lead_banner }}
+<a href="{{ link }}" target="_blank">
+<!-- Desktop Banner -->
+{{ if desktop }}
+<div class="hidden md:flex justify-center w-full max-h-[280px]">
+    <img src="{{ desktop }}" alt="Lead Banner" class="max-w-full max-h-full object-contain">
+</div>
+{{ /if }}
+
+<!-- Tablet Banner -->
+{{ if tablet }}
+<div class="hidden sm:flex md:hidden justify-center w-full max-h-[180px]">
+    <img src="{{ tablet }}" alt="Lead Banner" class="max-w-full max-h-full object-contain">
+</div>
+{{ /if }}
+
+<!-- Mobile Banner -->
+{{ if mobile }}
+<div class="block sm:hidden flex justify-center w-full max-h-[50px]">
+    <img src="{{ mobile }}" alt="Lead Banner" class="max-w-full max-h-full object-contain">
+</div>
+{{ /if }}
+</a>
+{{ /lead_banner }}

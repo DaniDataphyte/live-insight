@@ -1,0 +1,42 @@
+<h1>{{ product:title }}</h1>
+
+<div class="product-details">
+    <p><strong>Price:</strong> {{ price }}</p>
+    <p>Product ID: {{ id }}</p>
+    <p><strong>Description:</strong> {{ content }}</p>
+    
+    <p><strong>Product Type:</strong> {{ product_type }}</p>
+    <p><strong>Tax Category:</strong> {{ tax_category }}</p>
+    
+    {{ if product_type == "digital" }}
+        <div class="digital-product-info">
+            <h3>Digital Product</h3>
+            {{ if downloadable_asset }}
+                <p><strong>Downloadable Files:</strong></p>
+                <ul>
+                    {{ downloadable_asset }}
+                        <li>{{ value }}</li>
+                    {{ /downloadable_asset }}
+                </ul>
+            {{ /if }}
+            
+            {{ if download_limit }}
+                <p><strong>Download Limit:</strong> {{ download_limit }}</p>
+            {{ else }}
+                <p><strong>Download Limit:</strong> Unlimited</p>
+            {{ /if }}
+        </div>
+    {{ /if }}
+
+    <form method="POST" action="{{ route:sc-cart.store }}">
+        {{ csrf_field }}
+        <input type="hidden" name="product_id" value="{{ id }}">
+        
+        <div class="quantity-selector">
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1">
+        </div>
+        
+        <button type="submit" class="add-to-cart-button">Add to Cart</button>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+<!-- Grid layout -->
+<div class="container mx-auto">
+    <div class="mx-5 pb-10">
+        <div class="grid grid-cols md:grid-cols-3 gap-12">
+
+            <!-- Column 1 -->
+            {{ posts }}
+            <div class="">
+                <a href="{{ url }}">
+                    <img src="{{ featured_image ?? landscape_default_image:landscape_image }}"
+                        alt="{{ featured_image:alt }}"
+                        class="w-full h-[250px] object-cover rounded-md mb-4 transition-transform transform hover:scale-105 duration-300">
+                </a>
+
+                <!-- Check if any of the fields exist and render them -->
+               
+
+                <a href="{{ url }}">
+                    <h3 class="font-bold text-lg mb-2 text-gray-900">{{ title }}</h3>
+                </a>
+                <p class="text-xs mb-2" alt="Author">{{ author }} {{ name }} {{ /author }}</p>
+                <p class="text-base tracking-tight line-clamp-2">
+                    {{ if content | is_array }}
+                    {{ content | bard_text | strip_tags }}...
+                    {{ else }}
+                    {{ content | strip_tags }}...
+                    {{ /if }}
+                </p>
+            </div>
+            {{ /posts }}
+
+            <!-- Static content -->
+            <div class="flex flex-col py-20 bg-gray-300">
+                <p>Testing</p>
+            </div>
+        </div>
+    </div>
+</div>

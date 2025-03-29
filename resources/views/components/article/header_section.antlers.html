@@ -1,0 +1,14 @@
+{{ if topics_categories or issues_categories }}
+<p class="text-xs uppercase mb space-x-2">
+    {{ if topics_categories }}
+    {{ topics_categories }}<a href="{{ url }}">{{ title }}</a>{{ /topics_categories }}
+    {{ elseif issues_categories }}
+    {{ issues_categories }}<a href="{{ url }}">{{ title }}</a>{{ /issues_categories }}
+    {{ /if }}
+</p>
+{{ /if }}
+<h1 class="text-3xl md:text-4xl font-bold text-white">{{ title }}</h1>
+<p>
+    <span class="text-sm font-semibold">{{ author }} {{ name }} {{ /author }}</span> | <span class="text-xs">{{ date
+        }}</span>
+</p>

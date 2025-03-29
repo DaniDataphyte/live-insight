@@ -1,0 +1,17 @@
+<div class="py-5">
+<form method="POST" action="{{ route:newsletter.subscribe }}">
+    {{ csrf_field }}
+    
+    <input type="text" name="title" placeholder="First Name" required>
+    <input type="text" name="lastname" placeholder="Last Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+
+    <label><input type="checkbox" name="preferred[]" value="topics"> Topics</label>
+    <label><input type="checkbox" name="preferred[]" value="issues"> Issues</label>
+    <label><input type="checkbox" name="preferred[]" value="visualisation"> Visualisation</label>
+    <label><input type="checkbox" name="preferred[]" value="data_card"> Data Card</label>
+
+    <button type="submit" class="text-gray-500 bg-dataphyteblue">Subscribe</button>
+</form>
+</div>
+

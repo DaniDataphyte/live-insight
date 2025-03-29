@@ -1,0 +1,17 @@
+title: Subscribers
+fields:
+  - handle: email
+    field:
+      type: text
+      display: Email
+      validate: required|email|unique:subscribers,email
+
+  - handle: groups
+    field:
+      type: checkboxes
+      display: Subscription Groups
+      options:
+        topics: Topics
+        issues: Issues
+        daily_cards: Daily Cards
+        newsletter: General Newsletter

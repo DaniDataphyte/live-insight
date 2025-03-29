@@ -1,0 +1,6 @@
+id: 9ef9d4df-4b30-4554-954c-1d0666e77a8f
+enabled: true
+source: /issue/2024/02/https-dataphyte-substack-com-p-the-cost-of-a-healthy-diet
+destination: /issue/2024/02/the-cost-of-a-healthy-diet
+type: 301
+match_type: exact

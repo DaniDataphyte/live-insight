@@ -1,0 +1,102 @@
+<div>
+    <div class="max-w-6xl mx-auto py-20 px-6 grid grid-cols-1 md:grid-cols-3 gap-8"
+        x-data="{ modals: { download: false } }">
+
+        
+        <!-- First Column: Product Card -->
+        <div class="md:col-span-2 bg-white shadow-lg rounded-lg p-6">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+
+                <!-- Featured Image (Portrait) -->
+                <div class="relative w-full max-w-lg rounded-lg shadow-lg overflow-hidden bg-gray-200">
+                    {{ if featured_image }}
+                    <img src="{{ featured_image }}" alt="{{ title }}"
+                        class="w-full h-auto aspect-[0.71/1] object-cover">
+                    {{ else }}
+                    <div class="flex items-center justify-center h-full bg-gray-300">
+                        <span class="text-gray-500">No Image Available</span>
+                    </div>
+                    {{ /if }}
+                </div>
+
+                <!-- Product Details -->
+                <div class="w-full">
+                    <h1 class="text-xl font-bold">{{ title }}</h1>
+                    <p class="text-gray-500 text-sm mt-2">Published on {{ date format="F j, Y" }}</p>
+                    <p><span class="font-bold">Tags:</span><span class="text-sm">{{ if tags }}
+                            {{ tags }}<a href="{{ url }}">{{ title }}</a>, {{ /tags }}</span>
+                        {{ /if }} 
+                    </p>
+
+                    <!-- Download Section -->
+                    {{ if downloadable_content }}
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-600 py-4">Downloads: {{ download_count }}</p>
+                        <button class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+                            @click="modals.download = true">
+                            Download File
+                        </button>
+                    </div>
+
+                    <!-- Include the modal -->
+                    {{ partial:components/modals/pub_download }}
+                    {{ /if }}
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="prose mt-4">
+                <p>
+                    {{ content }}
+                </p>
+            </div>
+        </div>
+
+
+
+        <!-- Second Column: Related Posts -->
+        <div class="bg-gray-100 shadow-lg rounded-lg p-6">
+            <h2 class="text-xl font-semibold mb-4">Related Posts</h2>
+            <ul class="space-y-4">
+                {{ collection:publications limit="5" where="tags:contains:{tags}" sort="date:desc" }}
+                <li>
+                    <a href="{{ url }}" class="block hover:text-blue-600">
+                        <h3 class="text-base font-medium">{{ title }}</h3>
+                        <p class="text-gray-500 text-sm">{{ date format="F j, Y" }}</p>
+                    </a>
+                </li>
+                {{ /collection:publications }}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="bg-gray-200 pt-20">
+        <div class="container mx-auto">
+            {{# {{ collection:topics|issues|special_series|investigations taxonomy:tags="{ tags }" as="posts" limit="5"
+            sort="date:desc" }}
+
+            {{ partial:partials/related_across }}
+
+            {{ /collection:topics|issues|special_series|investigations }} #}}
+
+
+
+
+            {{ assign:current_tags = "{ tags pluck='slug' pipe }" }}
+
+            {{ collection from="topics|issues|special_series|investigations"
+            limit="5"
+            sort="date:desc"
+            taxonomy:tags:any="{current_tags}"
+            not:id="{id}"
+            as="posts"}}
+            {{ partial:partials/related_across }}
+            {{ /collection }}
+
+
+        </div>
+
+
+    </div>
+</div>

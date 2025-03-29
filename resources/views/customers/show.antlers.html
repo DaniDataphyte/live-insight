@@ -1,0 +1,11 @@
+<h1>{{ customer:name }}</h1>
+
+<p><strong>Email:</strong> {{ customer:email }}</p>
+<p><strong>Orders:</strong></p>
+<ul>
+    {{ customer:orders }}
+        <li>
+            <a href="{{ url }}">{{ order:id }} - {{ order:grand_total | format_money }}</a>
+        </li>
+    {{ /customer:orders }}
+</ul>

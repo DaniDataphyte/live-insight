@@ -1,0 +1,38 @@
+<div class="sticky top-0 z-50 bg-white shadow-md">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 backdrop-blur-lg bg-opacity-90"
+        x-data="{ mobileMenuOpen: false, productMenuOpen: false, profileMenuOpen: false, dropdowns: { product: false, profile: false } }">
+        <div class="">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                {{ partial:components/menu/logo}}
+
+                <div class="hidden sm:flex space-x-4 items-center">
+                    <!-- Desktop Navigation -->
+                    {{ partial:components/menu/desktop_nav }}
+
+                    <!-- Product Dropdown -->
+                    {{ partial:components/menu/d_product}}
+
+                    <!-- Login button -->
+                    {{ partial:components/menu/login_btn}}
+                </div>
+
+                <!-- Mobile Buttons -->
+                <div class="flex sm:hidden items-center space-x-4">
+                    <!-- Product Dropdown for Mobile -->
+                    {{ partial:components/menu/d_product}}
+
+                    <!-- Login button Mobile -->
+                    {{ partial:components/menu/login_btn}}
+
+                    <!-- Hamburger Menu -->
+                    {{ partial:components/menu/hamburger }}
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            {{ partial:components/menu/mobile_nav}}
+        </div>
+    </nav>
+
+</div>

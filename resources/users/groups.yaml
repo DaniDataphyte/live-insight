@@ -1,0 +1,16 @@
+editors:
+  title: Editors
+  roles:
+    - editor
+authors:
+  title: Authors
+  roles:
+    - author
+webmasters:
+  title: Webmasters
+  roles:
+    - webmaster
+marketers:
+  title: Marketers
+  roles:
+    - marketing

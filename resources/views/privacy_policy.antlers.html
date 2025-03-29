@@ -1,0 +1,19 @@
+<div class="max-w-4xl mx-auto py-10 px-6 bg-white rounded-lg">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ title }}</h1>
+    
+    <div class="prose lg:prose-lg max-w-none text-gray-700">
+        <div class="content">
+
+        {{ if content_2 | is_array }}
+        {{ content_2 | bard_text }}
+    {{ elseif content_2 }}
+        {{ content_2 }}
+    {{ else }}
+        <p>No content available</p>
+    {{ /if }}
+</div>
+
+    </div>
+
+    <p class="text-sm text-gray-500 mt-6">Last updated: {{ last_updated format="F j, Y" }}</p>
+</div>
