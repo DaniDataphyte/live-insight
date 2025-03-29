@@ -16,6 +16,7 @@
 /storage/pail
 /vendor
 public/assets/
+public/
 
 # User-related files (potentially sensitive)
 /users
